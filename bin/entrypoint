@@ -1,0 +1,15 @@
+#! /bin/bash -e
+
+source ./bin/buildbot_step
+
+export DISPLAY=:99
+Xvfb :99 > /dev/null 2>&1 &
+
+pwd
+# From here on we to operate inside of the actual checkout mostly for
+# convenience.
+cd /var/gaia
+
+pwd
+# run whatever command was intended on the branch (root of the repo)
+buildbot_step "run $*" $@
